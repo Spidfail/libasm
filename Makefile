@@ -5,7 +5,7 @@ NA := nasm
 CC := gcc
 AR := ar rcs
 
-CFLAGS := -L. -lasm -fsanitize=address
+CFLAGS := -L. -lasm -Wall -Wextra -Werror -fsanitize=address
 NAFLAGS := -fmacho64
 DEBFLAGS := -F dwarf -g
 

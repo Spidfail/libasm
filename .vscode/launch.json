@@ -1,0 +1,62 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "GDB32",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "stopOnEntry": false,
+            "preLaunchTask": "asm32"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "GDB64",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "stopOnEntry": false,
+            "preLaunchTask": "asm64"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Macos_asm64",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "stopOnEntry": false,
+            "preLaunchTask": "Macos_asm64"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "GAS",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "stopOnEntry": false,
+            "preLaunchTask": "gas"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "GDB32+GCC",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "stopOnEntry": false,
+            "preLaunchTask": "asm32+gcc"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "GDB64+GCC",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "stopOnEntry": false,
+            "preLaunchTask": "asm64+gcc"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "MACOS+GDB64+GCC",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "stopOnEntry": false,
+            "preLaunchTask": "macos+asm64+gcc"
+        },
+
+    ]
+}

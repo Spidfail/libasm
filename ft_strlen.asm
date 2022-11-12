@@ -1,18 +1,18 @@
 
 section .text
-
-    ft_strlen:              ;rdi -> const char *
-        push rbp            ;c stack protection
-        mov rcx, 0          ;counter initialisation
-        jmp L1
-    Increment:
-        inc rcx
+global _ft_strlen
+    _ft_strlen:          ;rdi -> const char *
+        push rbp
+        mov rbp, rsp
+        lea rax, BYTE[rdi]      ;counter initialisation    
     L1:
-        cmp [rdi+rcx], 0    ;if the offset is == to 0
-        jnz Increment
-        
+        cmp BYTE[rdi], 0
+        je rtn
+        add rdi, 1
+        jmp L1
+    rtn:
         ; Call exit
-        mov rax, 0x2000001  ;syscall number
-        mov rdi, rcx          ;return value
+        sub rdi, rax        ; store the value to be returned
+        mov rax, rdi
         pop rbp
-        syscall
+        ret

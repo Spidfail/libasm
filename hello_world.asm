@@ -35,4 +35,4 @@ _main: ;tell linker entry point
 
 section	.data
 	 msg:     db  'Hello world!', 10
-	 len:     equ  14
+	 len:     equ  13

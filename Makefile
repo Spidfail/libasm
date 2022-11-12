@@ -5,7 +5,7 @@ NA := nasm
 CC := gcc
 AR := ar rcs
 
-CFLAGS := -L. -lasm
+CFLAGS := -L. -lasm -fsanitize=address
 NAFLAGS := -fmacho64
 DEBFLAGS := -F dwarf -g
 
@@ -13,7 +13,8 @@ INC := libasm.h
 CSRCS := main.c
 SRCS := ft_strlen.asm \
 		ft_write.asm \
-		ft_strcpy.asm
+		ft_strcpy.asm \
+		ft_strdup.asm
 OBJS := $(SRCS:.asm=.o)
 
 ################################################################
@@ -31,7 +32,7 @@ $(AR_FILE): $(OBJS)
 	$(AR) $@ $^
 
 %.o :	%.asm $(INC) $(CSRCS)
-	$(NA) $(NAFLAGS) $< -o $@
+	$(NA) $(NAFLAGS) $(DEBFLAGS) $< -o $@
 
 ################################################################
 

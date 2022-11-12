@@ -2,6 +2,7 @@
 extern _malloc
 extern _ft_strlen
 extern _ft_strcpy
+extern ___error
 
 default rel
 

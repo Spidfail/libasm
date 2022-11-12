@@ -14,7 +14,8 @@ CSRCS := main.c
 SRCS := ft_strlen.asm \
 		ft_write.asm \
 		ft_strcpy.asm \
-		ft_strdup.asm
+		ft_strdup.asm \
+		ft_read.asm
 OBJS := $(SRCS:.asm=.o)
 
 ################################################################

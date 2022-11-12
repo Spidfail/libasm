@@ -23,6 +23,12 @@ int     test_strdup(const char *ptr) {
         return EXIT_SUCCESS;
 }
 
+int     test_read(char *filename) {
+    int     fd = open(filename, O_RDONLY);
+    if (fd == -1)
+        return -1;
+}
+
 int     main(int ac, char *av[]) {
     char    hello[13] = "Hello World!\0";
     ssize_t rtn = 0;

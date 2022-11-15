@@ -1,6 +1,4 @@
 #include "libasm.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 int     test_strdup(const char *ptr) {
         char *rtn_off = NULL;
@@ -36,7 +34,7 @@ int     test_read(char *filename) {
     int     fd = 0;
     if (file != NULL)
         fd = fileno(file);
-    fpos_t  start;
+    fpos_t  start = {0};
 
     if (file != NULL)
         fgetpos(file, &start);
@@ -44,7 +42,7 @@ int     test_read(char *filename) {
         fd = FOPEN_MAX;
     bzero(buff, 100);
     rtn = read(fd, buff, 99);
-    printf("official :  \n####################\n%s\n####################\n", buff);
+    printf("\nofficial :  ####################\n%s\n####################\n", buff);
     printf("official return :  %zd\n", rtn);
     if (rtn == -1)
         perror("Official crash : ");
@@ -52,7 +50,7 @@ int     test_read(char *filename) {
         fsetpos(file, &start);
     bzero(buff, 51);
     rtn = ft_read(fd, buff, 99);
-    printf("libasm :  \n####################\n%s\n####################\n", buff);
+    printf("\nlibasm :  ####################\n%s\n####################\n", buff);
     printf("libasm return :  %zd\n", rtn);
     if (rtn == -1)
         perror("Libasm crash : ");

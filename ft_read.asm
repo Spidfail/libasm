@@ -2,10 +2,10 @@ extern ___error
 global _ft_read
 
 section .text
-    _ft_read:
+    _ft_read:           ; rdi = fd, rsi = buf, rdx = count
         push rbp
         mov rbp, rsp
-        mov rax, 0x2000003
+        mov rax, 0x2000003  ; syscall to read on macOs
         syscall
         jc set_errno
         jmp done

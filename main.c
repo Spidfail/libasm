@@ -1,4 +1,5 @@
 #include "libasm.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 int     test_strdup(const char *ptr) {
@@ -24,10 +25,38 @@ int     test_strdup(const char *ptr) {
         return EXIT_SUCCESS;
 }
 
+/// Carefull, we do not check if the fd or the file is valid or not to test
+/// if the errno value is correctly set.
+/// Fd and filename shouldn't be set to NULL or 0 together.
 int     test_read(char *filename) {
-    int     fd = open(filename, O_RDONLY);
-    if (fd == -1)
-        return -1;
+    char        buff[100];
+    ssize_t     rtn = 0;
+
+    FILE    *file = fopen(filename, "r");
+    int     fd = 0;
+    if (file != NULL)
+        fd = fileno(file);
+    fpos_t  start;
+
+    if (file != NULL)
+        fgetpos(file, &start);
+    if (fd <= 2)
+        fd = FOPEN_MAX;
+    bzero(buff, 100);
+    rtn = read(fd, buff, 99);
+    printf("official :  \n####################\n%s\n####################\n", buff);
+    printf("official return :  %zd\n", rtn);
+    if (rtn == -1)
+        perror("Official crash : ");
+    if (file != NULL)
+        fsetpos(file, &start);
+    bzero(buff, 51);
+    rtn = ft_read(fd, buff, 99);
+    printf("libasm :  \n####################\n%s\n####################\n", buff);
+    printf("libasm return :  %zd\n", rtn);
+    if (rtn == -1)
+        perror("Libasm crash : ");
+    fclose(file);
     return EXIT_SUCCESS;
 }
 
@@ -37,10 +66,10 @@ int     main() {
     
     printf("\n##### TEST #####\n");
 
-    printf("-----strlen : %s\n", hello);
+    printf("\n-----strlen : %s\n", hello);
     printf("official = %zu | return value = %zu\n", strlen(hello), ft_strlen(hello));
     
-    printf("-----write : %s\n", hello);
+    printf("\n-----write : %s\n", hello);
     for (size_t i = 0 ; i < 13 ; ++i) {
         rtn = ft_write(1, hello, i);
         printf(" | return value = %zu\n", rtn);
@@ -49,7 +78,7 @@ int     main() {
         char *buff = calloc(ft_strlen(hello) + 1, sizeof(char));
         if (buff == NULL)
             return -1;
-        printf("-----strcpy : %s\n", hello);
+        printf("\n-----strcpy : %s\n", hello);
         printf("official :  [%p] %s\n", strcpy(buff, hello), buff);
         printf("cleaning    ...\n");;
         bzero(buff, ft_strlen(hello));
@@ -57,9 +86,14 @@ int     main() {
         free(buff);
     }
     {
-        printf("-----strdup :\n");
+        printf("\n-----strdup :\n");
         test_strdup(hello);
         test_strdup("a");
         test_strdup("\0");
+    }
+    {
+        printf("\n-----read :\n");
+        test_read("./ft_read.asm");
+        test_read("Wrong");
     }
 }

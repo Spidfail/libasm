@@ -1,8 +1,9 @@
-extern ___error
-global _ft_write
+; extern ___error
+extern __errno_location
+global ft_write
 
 section .text
-    _ft_write:
+    ft_write:
         push rbp
         mov rbp, rsp
         mov     rax, 0x2000004	; write syscall number
@@ -12,7 +13,7 @@ section .text
     set_errno:
         push rax
         push rdx        ; Useless code, make stack alligned
-        call ___error
+        call __errno_location
         pop rdx
         pop rcx
         mov [rax], rcx  ; Set the errno in the int ptr
@@ -21,5 +22,5 @@ section .text
         pop rbp
         ret
 
-; Compilation help
+; Compilation help on MacOS
 ;nasm -fmacho64 ft_write.asm -o ft_write.o && ld -macosx_version_min 10.14 -no_pie -L /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib -lSystem ft_write.o -o ft_write && ./ft_write

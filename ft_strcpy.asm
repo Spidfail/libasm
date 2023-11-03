@@ -1,7 +1,7 @@
 
 section .text
-global _ft_strcpy
-    _ft_strcpy: ; rdi = dest, rsi = src
+global ft_strcpy
+    ft_strcpy: ; rdi = dest, rsi = src
         push rbp
         mov rbp, rsp
         push rdi    ; save the pointer to return it

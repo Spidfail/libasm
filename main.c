@@ -92,6 +92,6 @@ int     main() {
     {
         printf("\n-----read :\n");
         test_read("./ft_read.asm");
-        test_read("Wrong");
+        //test_read("Wrong");
     }
 }

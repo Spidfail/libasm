@@ -1,4 +1,4 @@
-extern _ft_strlen
+extern ft_strlen
 
 default rel
 
@@ -17,7 +17,7 @@ section .text
         lea rdi, [msg]
         push rbp    
         mov rbp, rsp
-        call _ft_strlen
+        call ft_strlen
         mov rdi, rax        ; store the value to be returned
         pop rbp             ; recover the pointer
         jmp exit

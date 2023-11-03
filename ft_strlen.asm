@@ -1,7 +1,7 @@
 
 section .text
-global _ft_strlen
-    _ft_strlen:          ;rdi -> const char *
+global ft_strlen
+    ft_strlen:          ;rdi -> const char *
         push rbp
         mov rbp, rsp
         lea rax, BYTE[rdi]      ;counter initialisation    

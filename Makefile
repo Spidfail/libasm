@@ -5,8 +5,8 @@ NA := nasm
 CC := gcc
 AR := ar rcs
 
-CFLAGS := -L. -lasm -Wall -Wextra -Werror -fsanitize=address
-NAFLAGS := -fmacho64
+CFLAGS := -L. -lasm -Wall -Wextra -Werror -no-pie -fsanitize=address
+NAFLAGS := -felf64
 DEBFLAGS := -F dwarf -g
 
 INC := libasm.h
